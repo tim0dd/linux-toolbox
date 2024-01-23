@@ -32,12 +32,11 @@ add_cron_jobs() {
     light_time=$(parse_time "$1")
     dark_time=$(parse_time "$2")
 
-    light_command="sed -i 's/^ColorScheme=.*/ColorScheme=$LIGHT_THEME/' $PROFILE_PATH >> /home/timo/konsole_auto_theme_switch.log 2>&1"
-    dark_command="sed -i 's/^ColorScheme=.*/ColorScheme=$DARK_THEME/' $PROFILE_PATH >> /home/timo/konsole_auto_theme_switch.log 2>&1"
+    light_command="sed -i 's/^ColorScheme=.*/ColorScheme=$LIGHT_THEME/' $PROFILE_PATH"
+    dark_command="sed -i 's/^ColorScheme=.*/ColorScheme=$DARK_THEME/' $PROFILE_PATH"
 
     (crontab -l 2>/dev/null; echo "$light_time * * * $light_command $CRON_JOB_ID") | crontab -
     (crontab -l 2>/dev/null; echo "$dark_time * * * $dark_command $CRON_JOB_ID") | crontab -
-
 }
 
 # Main execution based on command line argument
